@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "matcher": "Bash|Edit|Write",
+        "bash": "node .github/hooks/branch-policy.js copilot",
+        "powershell": "node .github/hooks/branch-policy.js copilot",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "matcher": "Bash|Edit|Write",
+        "bash": "node .github/hooks/branch-policy.js copilot",
+        "powershell": "node .github/hooks/branch-policy.js copilot",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "type": "command",
+        "matcher": "Bash",
+        "bash": "node .github/hooks/branch-policy.js copilot",
+        "powershell": "node .github/hooks/branch-policy.js copilot",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/branch-policy.js copilot",
+        "powershell": "node .github/hooks/branch-policy.js copilot",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/branch-policy.js copilot",
+        "powershell": "node .github/hooks/branch-policy.js copilot",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
