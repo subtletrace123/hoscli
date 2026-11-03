@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HosCli｜医院ログイン</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="brand-panel" aria-label="HosCliの案内">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <p class="eyebrow">MEDICAL CLINIC PORTAL</p>
+      <h1>HosCli</h1>
+      <p class="brand-copy">医院と患者さまをつなぐ、<br>安心の連携予約システム</p>
+      <div class="hospital-note"><span class="note-line"></span><p>畷生会脳神経外科病院<br><strong>医院アカウント専用ログイン</strong></p></div>
+      <p class="brand-footer">Secure access for healthcare partners</p>
+    </section>
+    <section class="form-panel">
+      <div class="form-wrap">
+        <div class="mobile-brand">HosCli</div>
+        <p class="eyebrow form-eyebrow">医院アカウント</p>
+        <h2>ログイン</h2>
+        <p class="lead">医院単位で発行されたIDとパスワードを入力してください。<br>ログイン後は自院の予約情報のみ利用できます。</p>
+        <form id="login-form" novalidate>
+          <div class="field"><label for="clinic-id">医院ID</label><input id="clinic-id" name="clinicId" type="text" autocomplete="username" placeholder="例：clinic-001" required></div>
+          <div class="field"><div class="label-row"><label for="password">パスワード</label><a href="#support">お困りの方</a></div><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="64" placeholder="パスワードを入力" required><button id="toggle-password" type="button" aria-label="パスワードを表示">表示</button></div></div>
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+          <button class="submit-button" type="submit">自院予約へログイン</button>
+        </form>
+        <aside class="password-note"><span class="info-icon" aria-hidden="true">i</span><p>初期パスワードで初回ログインした場合は、<br><strong>変更完了まで予約画面を利用できません。</strong><br>ログインセッションの有効期限は4時間です。</p></aside>
+        <p class="privacy-note">患者ログインは不要です。医院スタッフ向けの画面です。</p>
+        <p id="support" class="support">サポート窓口：<a href="mailto:kanri@tesseikai.jp">kanri@tesseikai.jp</a></p>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector('#login-form');
+    const password = document.querySelector('#password');
+    const toggle = document.querySelector('#toggle-password');
+    const message = document.querySelector('#form-message');
+    toggle.addEventListener('click', () => {
+      const visible = password.type === 'text';
+      password.type = visible ? 'password' : 'text';
+      toggle.textContent = visible ? '表示' : '非表示';
+      toggle.setAttribute('aria-label', visible ? 'パスワードを表示' : 'パスワードを隠す');
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      message.className = 'form-message';
+      if (!form.checkValidity()) { message.textContent = '医院IDとパスワードを入力してください。'; message.classList.add('error'); form.reportValidity(); return; }
+      message.textContent = 'ログイン処理を開始します。'; message.classList.add('success');
+    });
+  </script>
+</body>
+</html>
